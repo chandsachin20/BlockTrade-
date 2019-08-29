@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BlockTrade</title>
+
+    <!-- Bootstrap -->
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+
+      #tableId {
+        font-weight: bold;
+      }
+
+      #tableId td {
+        width: 40%;
+      }
+
+      #table-propHistory {
+        font-weight: bold;
+      }
+
+      #tableId_ {
+        font-weight: bold;
+      }
+
+      #tableId_ td {
+        width: 40%;
+      }
+
+      #table-propHistory_ {
+        font-weight: bold;
+      }
+
+      #bg-image {
+        background-image: url(propertyImage1.jpg);
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.2;
+      }
+
+      </style>
+  </head>
+  <body>
+
+    <div  id="bg-image"> </div>
+
+    <nav class="navbar navbar-inverse">
+      <span class="navbar-brand" style="color: white;">BlockTrade</span>
+
+        <span  style="float: right; margin-top : 15px;"> <small style="color: #ffffff;" id="account"></small>  </span>
+
+    </nav>
+
+
+    <div class="container">
+
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home"><b>Add Property</b></a></li>
+            <li><a data-toggle="tab" href="#menu1"><b>Search Property</b></a></li>
+            <li><a data-toggle="tab" href="#menu2"><b>Transfer Property</b></a></li>
+          </ul>
+
+          <div class="tab-content">
+
+            <div id="home" class="tab-pane fade in active">
+
+              <div class="row">
+
+                <div class="col-sm-5">
+                <h3> <b> Add Property </b></h3>
+                <br/>
+                <form action="" id="PropAdd" method="POST">
+                  <div class="form-group">
+                    <label>Property Registration No.</label>
+                    <input type="text" class="form-control" id="RegNo" name="RegNo" placeholder="Enter Property Registration No." required>
+                  </div>
+                  <div class="form-group">
+                    <label>Property Owner Name</label>
+                    <input type="text" class="form-control" id="OwnerName" name="OwnerName" placeholder="Enter Owner Name " required>
+                  </div>
+                  <div class="form-group">
+                    <label>Property Value/Price</label>
+                    <input type="text" class="form-control" id="PropVal" name="PropVal" placeholder="Enter Property Value/Price" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Property Description</label>
+                    <textarea id="PropDesc" name="PropDesc" rows="4" style="width: 100%;"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="btn-AddProp">Add Property</button>
+                  </div>
+                </form>
+                </div>
+
+                <div class="col-sm-7">
+                </div>
+                </div>
+              </div>
+
+
+
+
+          <div id="menu1" class="tab-pane fade">
+
+              <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-3">
+                      <h3><b> Search Property </b></h3>
+
+                      <form action="" id="propResultForm" method="POST" style="margin-top: 20px;" >
+                        <div class="form-group">
+                          <label>Property Registration No.</label>
+                          <input type="text" class="form-control" id="searchProp" name="searchProp" placeholder="Enter Property Registration No." value="">
+                        </div>
+
+                        <button type="submit"  class="btn btn-primary" id="btn-searchProp" value="Submit">Search Property</button>
+                      </form>
+                    </div>
+                    <div class="col-sm-6">
+                      <div id="propResult"  style="margin-top: 20px; margin-left: 15px; display: none;">
+                      <table class="table table-striped" id="tableId">
+                        <thead style="background-color: #2f1f2a; color: white;">
+                          <tr>
+                            <th colspan="2">Property Details</th>
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <tr>
+                            <td>Property ID </td>
+                            <td id="propId"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Registration No. </td>
+                            <td id="regNo"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Registration Date </td>
+                            <td id="regDateTime"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Current Owner ID </td>
+                            <td id="ownerId"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Current Owner Name </td>
+                            <td id="ownerName"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Property Value/Price </td>
+                            <td id="propVal"></td>
+                          </tr>
+
+                          <tr>
+                            <td>Property Description </td>
+                            <td id="propDesc"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <button class="btn btn-primary" id="btn-propHistory" value="propHistory">View Property History</button>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                  </div>
+
+
+                  <div class="row"  style="margin: 20px 30px 10px 20px;">
+
+                    <div class="col-sm-4">
+                    </div>
+
+                    <div class="col-sm-8" id="propHistoryList" style="display: none;">
+                      <table class="table table-striped" id="table-propHistory">
+                        <thead style="background-color: #3f2f4a; color: white;">
+                          <tr>
+                            <th>Owner Id</th>
+                            <th>Owner Name</th>
+                            <th>Registration date</th>
+                            <th>Buying Price/Value</th>
+                          <tr>
+                        </thead>
+
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+
+
+          <div id="menu2" class="tab-pane fade">
+
+            <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                  <div class="col-sm-3">
+
+                    <div class="row">
+                    <h3><b> Tansfer Property </b></h3>
+                    <form action="" id="verifyProperty" method="POST" style="margin-top: 20px;" >
+                      <div class="form-group">
+                        <label>Property Registration No.</label>
+                        <input type="text" class="form-control" id="verifyProp" name="verifyProp" placeholder="Enter Property Registration No." value="">
+                      </div>
+
+                      <button type="submit"  class="btn btn-primary" id="btn-verifyProp" value="Submit">Verify Property</button>
+                    </form>
+
+                    </div>
+
+                    <div class="row" style="margin-top: 30px; display: none;" id="propTransferForm">
+                      <h4> <b>Enter Property Transfer Details</b ></h4>
+                      <form action="" id="PropTransfer" method="POST" style="margin-top: 10px;">
+                        <div class="form-group">
+                          <label>New Owner Name</label>
+                          <input type="text" class="form-control" id="newOwnerName" name="newOwnerName" placeholder="Enter New Owner Name " required>
+                        </div>
+                        <div class="form-group">
+                          <label>Buying Price/Value</label>
+                          <input type="text" class="form-control" id="newPropVal" name="newPropVal" placeholder="Enter Buying Price/Value" required>
+                        </div>
+
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary" id="btn-TransferProp">Transfer Property</button>
+                        </div>
+                      </form>
+
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div id="propResult_"  style="margin-top: 20px; margin-left: 20px;  display: none;">
+                    <table class="table table-striped" id="tableId_">
+                      <thead style="background-color: #2f1f2a; color: white;">
+                        <tr>
+                          <th colspan="2">Property Details</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                          <td>Property ID </td>
+                          <td id="propId_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Registration No. </td>
+                          <td id="regNo_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Registration Date </td>
+                          <td id="regDateTime_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Current Owner ID </td>
+                          <td id="ownerId_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Current Owner Name </td>
+                          <td id="ownerName_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Property Value/Price </td>
+                          <td id="propVal_"></td>
+                        </tr>
+
+                        <tr>
+                          <td>Property Description </td>
+                          <td id="propDesc_"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <button class="btn btn-primary" id="btn-propHistory_" value="propHistory_">View Property History</button>
+
+                    </div>
+
+                  </div>
+                  <div class="col-sm-2">
+                  </div>
+                </div>
+
+                <div class="row"  style="margin: 15px 30px 10px 20px;">
+
+                  <div class="col-sm-4">
+                  </div>
+
+                  <div class="col-sm-8" id="propHistoryList_" style="display: none;">
+                    <table class="table table-striped" id="table-propHistory_">
+                      <thead style="background-color: #3f2f4a; color: white;">
+                        <tr>
+                          <th>Owner Id</th>
+                          <th>Owner Name</th>
+                          <th>Registration date</th>
+                          <th>Buying Price/Value</th>
+                        <tr>
+                      </thead>
+
+                    </table>
+                  </div>
+
+                </div>
+
+          </div>
+
+      </div>
+      </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
