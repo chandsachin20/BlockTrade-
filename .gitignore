@@ -1,4 +1,4 @@
-/node modules
+/node_modules
 package.json
 package-lock.json
 bs-config.json
